@@ -1,0 +1,3 @@
+[submodule "cms_backend/IndicTransTokenizer"]
+	path = cms_backend/IndicTransTokenizer
+	url = https://github.com/VarunGumma/IndicTransTokenizer.git
