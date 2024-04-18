@@ -29,5 +29,23 @@ python "./itp/finetune_seq2seq.py" \
         --peft lora
 ```
 
-Generating responses from the finetune model and uploading to firestore:
-...
+Generating responses from the finetune model and uploading to firestore:  
+---------------Work In Progress----------------------------------------
+
+<br>
+Web UI for submitting feedback:  <br> 
+
+![sc_ui_init](https://github.com/redR0b0t/fms_cognizant/assets/143605527/7c8fa90a-2102-46ba-9bfc-98239946eaf8)
+
+
+<br>
+The feedback being processed by the python backend service:  <br>
+
+![sc_ui_processing](https://github.com/redR0b0t/fms_cognizant/assets/143605527/8b1fd639-747b-4b2e-945b-e89dca21fc46)
+
+
+<br>
+Data stored in Firestore Document uploaded by Web App:<br>
+
+![image](https://github.com/redR0b0t/fms_cognizant/assets/143605527/467c6679-64f5-49a2-a59d-3c0b1e8114be)
+
