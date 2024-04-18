@@ -26,7 +26,7 @@ Future<String> uploadAudioFile(String audioFilePath) async{
     audioFile=File(audioFilePath);
   }
     //Create a reference to the location you want to upload to in firebase
-    Reference reference = _storage.ref().child("audioFiles/${audioFilePath.split('/').last}.wav");
+    Reference reference = _storage.ref().child("fms_cognizant/audioFiles/${audioFilePath.split('/').last}.wav");
 
     //Upload the file to firebase
     UploadTask uploadTask = reference.putData(audioFile.readAsBytesSync() as Uint8List);

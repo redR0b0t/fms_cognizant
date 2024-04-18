@@ -48,7 +48,7 @@ class _ChatWindowPageState extends State<ChatWindowPage> {
   double composeHeight = 150000;
   TextEditingController complaintTextController = new TextEditingController();
   TextEditingController categoryTextController = new TextEditingController();
-  String selectedLang = 'Hindi';
+  String selectedLang = 'hindi';
   List<String> langs = [
     'Hindi',
     'English',
@@ -242,7 +242,7 @@ class _ChatWindowPageState extends State<ChatWindowPage> {
                             builder: (context, snapshots) {
                               ComplaintModel? pc, tc;
                               // lcid='1712420879057';
-                              if (snapshots.hasData) {
+                              if (snapshots.hasData && snapshots.data?.length!=0) {
                                 tc = snapshots.data?.first;
                                 debugPrint("------------------got tc ${tc?.getMap()}");
                                 debugPrint("-----------------------lcid =${lcid}");
@@ -257,11 +257,11 @@ class _ChatWindowPageState extends State<ChatWindowPage> {
                               }
 
                               if (pc != null ) {
-                                  if(pc?.audioURL!=''){
-                                    complaintTextController.value=TextEditingValue(text: "IndicWav2Vec output:${pc?.audioText}\nIndicTrans2 output:${pc?.transText}");
+                                   if(pc?.audioURL!=''){
+                                    complaintTextController.value=TextEditingValue(text: "IndicWav2Vec output:${pc?.audioText}\n${pc.lang=='english'?'':"output:${pc?.transText}"}");
                                   }
                                   else{
-                                    complaintTextController.value=TextEditingValue(text: "Complaint:${pc?.complaintText}\nIndicTrans2 output:${pc?.transText}");
+                                    complaintTextController.value=TextEditingValue(text: "Complaint:${pc?.complaintText}\n${pc.lang=='english'?'':"output:${pc?.transText}"}");
 
                                   }
                                   categoryTextController.value =TextEditingValue(text: pc!.output.replaceAll(',', '\n'));
@@ -452,7 +452,7 @@ class _ChatWindowPageState extends State<ChatWindowPage> {
                           String audioFileUrl =audioFilePath==''?'':
                               await uploadAudioFile(audioFilePath);
                           String complaintText = complaintTextController.text;
-                          lcid = await sendComplaint(widget.user!,lang: selectedLang,
+                          lcid = await sendComplaint(widget.user!,lang: selectedLang.toLowerCase(),
                               complaintText: complaintText,
                               audioURL: audioFileUrl);
                           Navigator.pop(context);
@@ -472,7 +472,7 @@ class _ChatWindowPageState extends State<ChatWindowPage> {
                               builder: (context) {
                                 return LoadingText(
                                     loadingText:
-                                        "Processing Complaint with AI4Bharat Models");
+                                        "Processing feedback using finetuned Model");
                               });
                         },
                       ),

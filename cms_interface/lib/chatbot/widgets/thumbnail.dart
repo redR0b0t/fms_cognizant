@@ -26,7 +26,7 @@ class ThumbnailChat extends StatelessWidget {
                                 width: index==1?120.0:50.0,
                                 height: index==1?200.0:50.0,
                                 child: Image.asset(
-                                  index==0?"assets/mh.jpg":index==1?"assets/bhashini.jpg":"assets/gcp.jpg",
+                                  index==0?"assets/genc.jpg":index==1?"assets/cognizant.jpg":"assets/genc.jpg",
                                   fit: BoxFit.cover,
                                 ))),
                       ),
