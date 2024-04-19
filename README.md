@@ -29,8 +29,29 @@ python "./itp/finetune_seq2seq.py" \
         --peft lora
 ```
 
-Generating responses from the finetune model and uploading to firestore:  
+# Backend Service
+Generating responses from the finetune model and uploading to firestore:  <br>
+<br>
+Steps to run the backend service:<br>
+
+```bash
+git clone https://github.com/redR0b0t/fms_cognizant.git
+cd fms_cognizant/cms_backend
+python ./run_service.py
+```
 ---------------Work In Progress----------------------------------------
+
+
+# WebApp
+<br>
+Steps to run the webapp:<br>
+
+```bash
+git clone https://github.com/redR0b0t/fms_cognizant.git
+cd fms_cognizant/cms_interface
+flutter run -d web-server
+```
+
 
 <br>
 Web UI for submitting feedback:  <br> 
