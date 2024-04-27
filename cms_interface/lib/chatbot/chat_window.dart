@@ -48,7 +48,7 @@ class _ChatWindowPageState extends State<ChatWindowPage> {
   double composeHeight = 150000;
   TextEditingController complaintTextController = new TextEditingController();
   TextEditingController categoryTextController = new TextEditingController();
-  String selectedLang = 'hindi';
+  String selectedLang = 'english';
   List<String> langs = [
     'Hindi',
     'English',
@@ -134,8 +134,8 @@ class _ChatWindowPageState extends State<ChatWindowPage> {
                       _buildLanguagePickerWidget((val) {
                         setState(() {
                           selectedLang = val!;
-                          sttEnabled = asr_langs.contains(selectedLang.toLowerCase());
-
+                          sttEnabled =
+                              asr_langs.contains(selectedLang.toLowerCase());
                         });
                       }),
                       SizedBox(
@@ -200,7 +200,10 @@ class _ChatWindowPageState extends State<ChatWindowPage> {
                                       )
                                     : Row(
                                         children: [
-                                          Icon(CupertinoIcons.mic_off,size: swidth*0.05,),
+                                          Icon(
+                                            CupertinoIcons.mic_off,
+                                            size: swidth * 0.05,
+                                          ),
                                           Text(
                                               "Speech to text is not \navailable for ${selectedLang}")
                                         ],
@@ -242,34 +245,39 @@ class _ChatWindowPageState extends State<ChatWindowPage> {
                             builder: (context, snapshots) {
                               ComplaintModel? pc, tc;
                               // lcid='1712420879057';
-                              if (snapshots.hasData && snapshots.data?.length!=0) {
+                              if (snapshots.hasData &&
+                                  snapshots.data?.length != 0) {
                                 tc = snapshots.data?.first;
-                                debugPrint("------------------got tc ${tc?.getMap()}");
-                                debugPrint("-----------------------lcid =${lcid}");
-
+                                debugPrint(
+                                    "------------------got tc ${tc?.getMap()}");
+                                debugPrint(
+                                    "-----------------------lcid =${lcid}");
                               }
-                              if (tc!=null && tc.id == lcid) {
+                              if (tc != null && tc.id == lcid) {
                                 pc = tc;
+                              }
+
+                              if (pc != null && processingData == true) {
+                                if (pc?.audioURL != '') {
+                                  complaintTextController.value = TextEditingValue(
+                                      text:
+                                          "IndicWav2Vec output:${pc?.audioText}\n${pc.lang == 'english' ? '' : "IndicTrans2 output:${pc?.transText}"}");
+                                } else {
+                                  complaintTextController.value = TextEditingValue(
+                                      text:
+                                          "Complaint:${pc?.complaintText}\n${pc.lang == 'english' ? '' : "IndicTrans2 output:${pc?.transText}"}");
+                                }
+                                categoryTextController.value = TextEditingValue(
+                                    text: pc!.output.replaceAll(',', '\n'));
+
                                 if (processingData == true) {
                                   Navigator.pop(context);
                                   processingData = false;
-                                }
-                              }
-
-                              if (pc != null ) {
-                                   if(pc?.audioURL!=''){
-                                    complaintTextController.value=TextEditingValue(text: "IndicWav2Vec output:${pc?.audioText}\n${pc.lang=='english'?'':"output:${pc?.transText}"}");
-                                  }
-                                  else{
-                                    complaintTextController.value=TextEditingValue(text: "Complaint:${pc?.complaintText}\n${pc.lang=='english'?'':"output:${pc?.transText}"}");
-
-                                  }
-                                  categoryTextController.value =TextEditingValue(text: pc!.output.replaceAll(',', '\n'));
                                   Future.delayed(Duration.zero, () async {
                                     setState(() {});
                                   });
-
-                                  }
+                                }
+                              }
 
                               return Container(
                                 padding: const EdgeInsets.all(30),
@@ -327,7 +335,7 @@ class _ChatWindowPageState extends State<ChatWindowPage> {
             ),
             Expanded(
               child: Text(
-                selectedLang,
+                selectedLang.toCapitalized(),
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -444,15 +452,18 @@ class _ChatWindowPageState extends State<ChatWindowPage> {
                             style: TextStyle(fontSize: 16)),
                         onPressed: () async {
                           showDialog(
+                              barrierDismissible: false,
                               context: context,
                               builder: (context) {
                                 return LoadingText(
                                     loadingText: "Uploading Data");
                               });
-                          String audioFileUrl =audioFilePath==''?'':
-                              await uploadAudioFile(audioFilePath);
+                          String audioFileUrl = audioFilePath == ''
+                              ? ''
+                              : await uploadAudioFile(audioFilePath);
                           String complaintText = complaintTextController.text;
-                          lcid = await sendComplaint(widget.user!,lang: selectedLang.toLowerCase(),
+                          lcid = await sendComplaint(widget.user!,
+                              lang: selectedLang.toLowerCase(),
                               complaintText: complaintText,
                               audioURL: audioFileUrl);
                           Navigator.pop(context);
@@ -465,14 +476,15 @@ class _ChatWindowPageState extends State<ChatWindowPage> {
                           ).show(context);
 
                           // setState(() {
-                            processingData = true;
+                          processingData = true;
                           // });
                           showDialog(
+                              barrierDismissible: false,
                               context: context,
                               builder: (context) {
                                 return LoadingText(
                                     loadingText:
-                                        "Processing feedback using finetuned Model");
+                                        "Processing feedback using finetuned LLM");
                               });
                         },
                       ),

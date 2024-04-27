@@ -15,12 +15,13 @@ mixin AudioRecorderMixin {
     final stream = await recorder.startStream(config);
 
     stream.listen(
-          (data) => b.add(data),
+      (data) => b.add(data),
       onDone: () => downloadWebData(html.Url.createObjectUrl(html.Blob(b))),
     );
   }
 
   void downloadWebData(String path) {
+    return;
     // Simple download code for web testing
     final anchor = html.document.createElement('a') as html.AnchorElement
       ..href = path

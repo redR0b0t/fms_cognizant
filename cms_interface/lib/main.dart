@@ -4,7 +4,7 @@ import 'package:mhs_pred_app/chatbot/models/user_main.dart';
 import 'package:firebase_core/firebase_core.dart';
 // import './chatbot/chat_window.dart'
 
-var coll_name='fms_cognizant';
+var coll_name = 'fms_cognizant';
 final UserModel user = UserModel(uid: "fms_cognizant_user", name: "user");
 
 // var firebaseConfig = {
