@@ -83,4 +83,27 @@ Data stored in Firestore Document uploaded by Web App:<br>
 ![fs_doc](https://github.com/redR0b0t/fms_cognizant/assets/143605527/f9aae577-8051-415a-9796-b3fa72eebe8a)
 
 
+<br>
+Submit feedback in language of your choice using voice or text:<br>
 
+![sc_ui_init](https://github.com/redR0b0t/fms_cognizant/assets/143605527/d30e9395-c76f-4065-bea2-33bf98df35ae)
+
+
+<br>
+Backend processing of feedback using python app:<br>
+
+![sc_bc_proc](https://github.com/redR0b0t/fms_cognizant/assets/143605527/8bd80107-9669-4264-87ff-3e38f87a3304)
+
+
+<br>
+Response displayed on webapp:<br>
+
+![Screec_ui_res](https://github.com/redR0b0t/fms_cognizant/assets/143605527/d1cfe14a-dd62-4bbc-a738-38adb28f9d22)
+
+
+
+
+
+
+
+<br>
